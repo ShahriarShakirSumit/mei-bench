@@ -32,4 +32,4 @@ MEI-Bench follows semantic versioning. **v1.0.0** was the first release (615 ite
 
 ## Contact
 
-Shahriar Shakir Sumit (m.sumit@unsw.edu.au), UNSW Canberra. Please open an issue in the repository for bugs and questions.
+Shahriar Shakir Sumit (shahriar9121@gmail.com or m.sumit@unsw.edu.au), UNSW Canberra. Please open an issue in the repository for bugs and questions.

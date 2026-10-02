@@ -204,7 +204,8 @@ If MEI-Bench or this code is useful in your research, we'd really appreciate it 
 
 ## Questions and feedback
 
-We're happy to hear from you. Open an issue on GitHub, or write to Shahriar Shakir Sumit at m.sumit@unsw.edu.au.
+We're happy to hear from you. Open an issue on GitHub, or write to Shahriar Shakir Sumit at
+shahriar9121@gmail.com or m.sumit@unsw.edu.au.
 Pull requests are welcome too.
 
 ## Acknowledgement
