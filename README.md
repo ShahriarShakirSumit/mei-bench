@@ -184,8 +184,8 @@ machine-readable form.
 
 ## Licence
 
-The code is under the MIT licence and the annotations under CC BY 4.0. The COCO images stay under the COCO terms of
-use. Details are in `LICENSE`.
+The code is under the MIT licence (`LICENSE`) and the annotations under CC BY 4.0 (`data/LICENSE.md`). The COCO
+images stay under the COCO terms of use.
 
 ## Citing our work
 

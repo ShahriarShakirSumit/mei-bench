@@ -3,7 +3,7 @@
 ## MEI-Bench package
 The contents of this package -- annotations, region metadata, intervention
 metadata, schemas, and scripts -- are released under the **Creative Commons
-Attribution 4.0 International License (CC BY 4.0)**. See `LICENSE`.
+Attribution 4.0 International License (CC BY 4.0)**. See `data/LICENSE.md`; the code is under the MIT licence in `LICENSE`.
 
 ## COCO val2017 (referenced, not redistributed)
 COCO annotations are released under CC BY 4.0. COCO images are governed by the
