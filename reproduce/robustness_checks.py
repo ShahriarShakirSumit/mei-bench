@@ -7,7 +7,7 @@ Per model, on its re-run correct set C (paper's answers_match / answer_flipped; 
   texture : per item, the draw (6 random + salience) closest to the evidence box in (edge density, entropy),
             z-scored; SI/GG with that texture-matched sham
   mask    : CS/SI/GG with instance-mask evidence and translated-mask sham vs box CS/SI/GG on the same items
-Writes results/robustness_checks.json and results/tables/tab_robustness_{main,supp}.tex"""
+Writes outputs/paper/robustness_checks.json and outputs/paper/tables/tab_robustness_{main,supp}.tex"""
 import json, sys, statistics as st
 from pathlib import Path
 import numpy as np

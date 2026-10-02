@@ -1,6 +1,6 @@
 """Generate the supplementary's new tables from result files (no hand-typed numbers).
-Inputs: results/rerun_reproduction_9models.json (reproduction, 9 models), intersection_10open.json,
-clean_label_subset.json. Outputs: results/tables/tab_{reproduction,intersection,terciles,clean_label}.tex"""
+Inputs: reproduce/inputs/rerun_vs_original.json (reproduction, 9 models), intersection_10open.json,
+clean_label_subset.json. Outputs: outputs/paper/tables/tab_{reproduction,intersection,terciles,clean_label}.tex"""
 import json
 from pathlib import Path
 from repro_paths import REPRODUCTION, RESULTS, TABLES

@@ -1,12 +1,12 @@
-"""Expand the shipped predictions (results/predictions/**.jsonl.gz) into outputs/ for the analyses.
+"""Expand the shipped model outputs (model_outputs/**.jsonl.gz) into outputs/ for the analyses.
 
     python reproduce/unpack_results.py              # re-run + robustness conditions (reproduce the paper)
     python reproduce/unpack_results.py --only rerun # re-run only (before evaluating the conditions yourself)
 """
 import argparse, gzip, shutil
-from repro_paths import REPO, RERUN_PRED, ROBUSTNESS_OUT
+from repro_paths import MODEL_OUTPUTS, RERUN_PRED, ROBUSTNESS_OUT
 ap = argparse.ArgumentParser(); ap.add_argument("--only", choices=["rerun", "robustness"]); a = ap.parse_args()
-src = REPO / "results" / "predictions"
+src = MODEL_OUTPUTS
 n = 0
 for gz in sorted(src.rglob("*.jsonl.gz")):
     rel = gz.relative_to(src)

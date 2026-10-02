@@ -1,6 +1,6 @@
 """Clean-label subset (Appendix): GG and GS recomputed without the two task types whose labels are least certain
 (attribute_verification, text_in_image), on each model's own correct set C, with the paper's per_item_flips.
-Input: outputs/rerun_molmo_fixed/predictions (written by molmo_extract.py). Output: results/clean_label_subset.json"""
+Input: outputs/rerun_molmo_fixed/predictions (written by molmo_extract.py). Output: outputs/paper/clean_label_subset.json"""
 import json
 from repro_paths import RERUN_DATA, RERUN_PRED, RESULTS
 from scipy.stats import spearmanr

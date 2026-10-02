@@ -1,5 +1,5 @@
 """Poster/slide figure: GG per model under random shams (mean, min-max over 6 draws), saliency-, texture- and
-position-matched shams, and instance-mask evidence. Data: results/robustness_checks.json. Okabe-Ito palette."""
+position-matched shams, and instance-mask evidence. Data: outputs/paper/robustness_checks.json. Okabe-Ito palette."""
 import json
 from pathlib import Path
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt, numpy as np

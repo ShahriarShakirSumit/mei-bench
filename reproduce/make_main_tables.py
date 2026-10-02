@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 """Single source of every cross-model number in the MEI-Bench paper (ACML 2026).
 
-Rows: the values of the original run (results/original_run_summary.json) for the eleven models, except
+Rows: the values of the original run (reproduce/inputs/original_run_summary.json) for the eleven models, except
 Molmo-7B-D, whose row is recomputed from the pinned re-run with model-specific answer extraction
 (reproduce/molmo_extract.py) using the paper's OWN per_item_flips + bootstrap_gg (B=2000, seed 20260425).
 Model sets (stated explicitly, used everywhere):
   H (headline ranges)   = the ten open-source models (all n_c >= 30)
   X (cross-model stats) = H + Claude-Sonnet-4.5  (Gemini-2.5-Pro is a preliminary truncated run: excluded)
-Writes: results/tables/tab_main_results.tex, results/tables/tab_metric_correlations.tex,
-        results/main_numbers.json
+Writes: outputs/paper/tables/tab_main_results.tex, outputs/paper/tables/tab_metric_correlations.tex,
+        outputs/paper/main_numbers.json
 """
 import json, sys
 from pathlib import Path

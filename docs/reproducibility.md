@@ -1,14 +1,14 @@
 # Reproducibility Notes
 
 ## What is shipped
-- `results/predictions/rerun/`: every answer of the ten open-source models in the version-pinned re-run
+- `model_outputs/rerun/`: every answer of the ten open-source models in the version-pinned re-run
   (615 items x original + 5 variants).
-- `results/predictions/robustness/<condition>/`: the eight robustness conditions in the paper.
-- `results/*.json`, `results/tables/`, `results/figures/`: everything the paper reports, regenerated from the above
-  by `reproduce/` (README, step 1). On our machine the regenerated tables and JSON files are byte-identical to the
-  shipped ones and the figure PDFs differ only in their creation date.
-- `results/original_run/`: three tables and six figures kept as they appear in the paper, computed from the
-  original evaluation run, whose raw predictions are not included.
+- `model_outputs/robustness/<condition>/`: their answers in the eight robustness conditions of the paper.
+- `reproduce/inputs/`: two small inputs the scripts need: the per-model metrics of our original evaluation run (whose
+  raw answers are not included) and the comparison of the re-run with that original run.
+
+The scripts in `reproduce/` compute everything the paper reports from these files and write it to `outputs/paper/`.
+On our machine the resulting tables and numbers match the paper exactly.
 
 ## Environment of the paper
 Python 3.11.16, PyTorch 2.5.1 (CUDA 12.1), Transformers 4.46.3, one NVIDIA V100 32 GB; exact versions in

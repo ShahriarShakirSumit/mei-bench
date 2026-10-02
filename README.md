@@ -4,11 +4,8 @@
 
 Shahriar Shakir Sumit, Murat Tahtali and Seyedali Mirjalili. ACML 2026 (PMLR).
 
-This repository has everything behind our ACML 2026 paper: the benchmark annotations, the evaluation toolkit, every
-model output we collected, and the scripts that rebuild each table and figure in the paper.
-
-The benchmark is also on Hugging Face, where you can browse the questions and load them with one line:
-[huggingface.co/datasets/Shahriar10/mei-bench](https://huggingface.co/datasets/Shahriar10/mei-bench).
+This repository has the MEI-Bench benchmark, the code to evaluate any vision-language model on it, and the answers
+of the ten open-source models from our ACML 2026 paper.
 
 ## Why we built this
 
@@ -21,6 +18,45 @@ out, or scramble) that region and check whether the answer changes. Then we appl
 the same size somewhere else in the image, a "sham" region that holds none of the evidence. If a model really uses the
 evidence, its answer should change when the evidence is degraded and stay put when the sham is. Models that change
 their answer in both cases are fragile, not grounded, and the sham is what lets us see the difference.
+
+## The benchmark
+
+MEI-Bench has 615 questions about images from COCO val2017, in five kinds:
+
+| Kind of question | Items |
+|---|---|
+| Spatial relations ("Is the person to the left or right of the frisbee?") | 153 |
+| Counting | 144 |
+| Attribute checks | 118 |
+| Object identification | 114 |
+| Reading text in the image | 86 |
+
+Each question comes with the answers we accept, its kind and difficulty, the **evidence box** (the region that holds
+the answer) and the **sham box** (a region of about the same size that holds none of it), both as
+`[x, y, width, height]` in pixels.
+
+**Where to find it**
+
+* In this repository: `data/annotations/mei_bench.jsonl`, one question per line.
+* On Hugging Face, where you can browse it in the online viewer:
+  [huggingface.co/datasets/Shahriar10/mei-bench](https://huggingface.co/datasets/Shahriar10/mei-bench).
+
+```python
+import json
+items = [json.loads(line) for line in open("data/annotations/mei_bench.jsonl")]
+
+# or, from Hugging Face
+from datasets import load_dataset
+mei = load_dataset("Shahriar10/mei-bench", split="test")
+```
+
+The images aren't included, because they belong to COCO and keep their original licences. You download COCO
+val2017 yourself, and our script makes the edited images from the boxes (see "Evaluate a model" below).
+
+A few things to know: the 86 text-reading questions don't have verified answers yet, so they never count towards the
+grounding metrics; the colour labels in the attribute questions are noisy (about 20%); and all images come from one
+source. `DATASET_CARD.md` and `DATASHEET.md` have the full details, and `croissant.json` the same information in a
+machine-readable form.
 
 ## What we measure
 
@@ -50,22 +86,19 @@ Across ten open-source models on 615 questions from COCO val2017:
 ## What's in the repository
 
 ```
-mei_benchmark/          the toolkit: data loaders, image edits, model wrappers, metrics and scripts
-  configs/              base.yaml and models_open.yaml (ten models, pinned to the exact weights we used)
-data/annotations/       mei_bench.jsonl, the 615 benchmark items
-data/metadata/          schemas, a dataset summary, COCO source info and the filtering report (959 items down to 615)
-data/sample/            25 items to look at before you download anything
-data/rerun/             the items of our version-pinned re-run
-data/robustness_conditions/     the eight extra sham and mask conditions used in the paper's robustness checks
-reproduce/           the scripts that produce every number, table and figure in the paper
-results/                all model predictions, the result files, and the tables and figures they produce
-tests/                  unit tests for the image edits and the metrics
-tools/                  two small checkers for the annotation file
-docs/                   quickstart, data provenance, how the edits are made, licence notes
-DATASET_CARD.md, DATASHEET.md, croissant.json, MAINTENANCE.md
+mei_benchmark/               the toolkit: data loaders, image edits, model wrappers, metrics and scripts
+  configs/                   base.yaml and models_open.yaml (ten models, pinned to the exact weights we used)
+data/annotations/            mei_bench.jsonl, the 615 benchmark questions
+data/metadata/               schemas, a dataset summary, COCO source info and the filtering report (959 down to 615)
+data/sample/                 25 questions to look at before you download anything
+data/rerun/                  the questions of our version-pinned re-run
+data/robustness_conditions/  the eight extra sham and mask conditions used in the paper's robustness checks
+model_outputs/               every answer the ten models gave, so you can compare a new model with ours without a GPU
+reproduce/                   scripts that compute the paper's numbers from model_outputs/
+tests/                       unit tests for the image edits and the metrics
+tools/                       two small checkers for the annotation file
+docs/                        quickstart, data provenance, how the edits are made, licence notes
 ```
-
-We don't redistribute the COCO images themselves. You'll download COCO val2017 from the official site (see below).
 
 ## Getting started
 
@@ -85,33 +118,26 @@ python tools/validate_regions.py --annotations data/annotations/mei_bench.jsonl
 
 If you want to evaluate Claude or Gemini as well, also install `requirements-api.txt`.
 
-## Reproduce the paper from our saved outputs (CPU, a few minutes)
+## Reproduce the paper's numbers from our saved outputs (CPU, a few minutes)
 
 You don't need a GPU, model weights or COCO images for this part. Every answer every model gave is saved in
-`results/predictions/`, and these scripts rebuild the paper's numbers, tables and figures from them:
+`model_outputs/`, and these scripts compute the paper's numbers from them:
 
 ```bash
-python reproduce/unpack_results.py          # unpack the saved predictions into outputs/
-python reproduce/copy_original_run.py       # tables and figures from our original run (see below)
+python reproduce/unpack_results.py          # unpack the saved model outputs into outputs/
 python reproduce/molmo_extract.py           # read Molmo-7B-D's answers with its own answer parser
-python reproduce/molmo_stratified_tables.py     # Molmo-7B-D rows of the per-task tables
 python reproduce/make_main_tables.py               # main results and metric correlations
 python reproduce/make_figures.py              # the figures in the main paper
 python reproduce/robustness_checks.py           # random, saliency, position and texture shams, and mask evidence
 python reproduce/make_robustness_figure.py       # the robustness figure
 python reproduce/intersection_analysis.py \
-       --pred-dir outputs/rerun_molmo_fixed/predictions --out results/intersection_10open.json
+       --pred-dir outputs/rerun_molmo_fixed/predictions --out outputs/paper/intersection_10open.json
 python reproduce/clean_label_subset.py      # results without the noisier labels
 python reproduce/make_supplementary_tables.py          # the supplementary tables
 ```
 
-The results land in `results/tables/`, `results/figures/` and `results/*.json`, on top of the copies we ship. Run
-`git diff --stat results/` afterwards to see whether anything changed. When we did this on a fresh copy, every table
-and result file came out byte for byte the same, and the figures differed only in the date stamp inside the PDF.
-
-A few tables and figures (dataset statistics, area effects, the comparison of the three edits, the method diagram, the
-example images and four plots) come from our original evaluation run, whose raw
-outputs are no longer available, so we ship them as they are. `results/original_run/README.md` lists them.
+Everything lands in `outputs/paper/`: the numbers as JSON files, plus the tables and figures as they appear in the
+paper. When we ran these on a fresh copy, every table and number came out exactly as in the paper.
 
 ## Evaluate a model on MEI-Bench (GPU)
 
@@ -171,16 +197,8 @@ done
 ```
 
 Repeat the loop for each model, then run the reproduction scripts above from `molmo_extract.py` onward. One thing to
-watch: use `--only rerun` when you unpack here. Without it, our saved results for these conditions would be copied
+watch: use `--only rerun` when you unpack here. Without it, our saved answers for these conditions would be copied
 into `outputs/robustness/` and the evaluation would think there is nothing left to do.
-
-## About the data
-
-`data/annotations/mei_bench.jsonl` has 615 questions built from COCO val2017, spread over five kinds of question:
-spatial relations, counting, object identification, attribute checks and reading text in the image. Each item has
-the question, the accepted answers, the evidence box and the sham box. `DATASET_CARD.md` and `DATASHEET.md` explain
-how it was made, what it's good for and where its limits are, and `croissant.json` has the same information in a
-machine-readable form.
 
 ## Licence
 

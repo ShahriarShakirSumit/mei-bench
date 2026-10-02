@@ -3,11 +3,11 @@
 Reuses the paper's plotting helpers/style (scripts/regen_figures.py) unchanged; differences, all
 made for the final paper: Molmo-7B-D is plotted with its fixed values (it was dropped by name before),
 Gemini-2.5-Pro (preliminary) is excluded from comparisons, and accuracy is added to the correlation matrix.
-Model set = X of make_main_tables.py. Writes into results/figures/."""
+Model set = X of make_main_tables.py. Writes into outputs/paper/figures/."""
 import json, sys
 from pathlib import Path
 import numpy as np
-from repro_paths import ORIGINAL_SUMMARY, RESULTS, TABLES, FIGURES
+from repro_paths import ORIGINAL_SUMMARY, RESULTS, FIGURES
 import mei_benchmark.scripts.regen_figures as RF          # style + helpers only
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
@@ -61,28 +61,3 @@ for i in range(5):
 ax.set_title(f"Metric correlations (n={len(X)} models)"); fig.colorbar(im, ax=ax, fraction=0.045, pad=0.04)
 fig.savefig(FIG / "fig_metric_correlation.pdf"); plt.close(fig)
 print("wrote figures:", [p.name for p in FIG.glob("fig_*") if p.stat().st_mtime > __import__('time').time() - 120])
-
-# ---- task heatmap and radar (supplementary): Molmo with corrected per-task GG; Gemini (preliminary) excluded
-RF.AUTO = TABLES                      # parse the stratified table (Molmo row patched)
-strat = RF.parse_stratified()
-order = [m["model"] for m in sorted(X, key=lambda m: -m["GS"]) if m["model"] in strat]
-tasks = ["ObjID", "Attr", "Spatial", "Count", "Text"]
-Mh = np.array([[strat[m][t] for t in tasks] for m in order])
-fig, ax = plt.subplots(figsize=(5.5, max(2.8, 0.32 * len(order) + 1.2)))
-im = ax.imshow(Mh, cmap="viridis", vmin=-0.05, vmax=0.65, aspect="auto")
-ax.set_xticks(range(len(tasks))); ax.set_xticklabels(tasks)
-ax.set_yticks(range(len(order))); ax.set_yticklabels([RF.short_name(m) for m in order])
-for i in range(len(order)):
-    for j in range(len(tasks)):
-        ax.text(j, i, f"{Mh[i, j]:.2f}", ha="center", va="center", color="white" if Mh[i, j] < 0.3 else "black", fontsize=7)
-ax.set_title("Grounding Gap by task (blur)"); fig.colorbar(im, ax=ax, fraction=0.04, pad=0.04, label="GG")
-fig.savefig(FIG / "fig_gg_heatmap.pdf"); plt.close(fig)
-angles = np.linspace(0, 2 * np.pi, len(tasks), endpoint=False); angles = np.concatenate([angles, [angles[0]]])
-fig, ax = plt.subplots(figsize=(5.0, 5.0), subplot_kw=dict(polar=True))
-for m in ["InternVL2.5-8B", "Claude-Sonnet-4.5", "LLaVA-1.5-7B"]:
-    v = [max(strat[m][t], 0) for t in tasks]; v.append(v[0])
-    ax.plot(angles, v, color=RF.color_for(m), label=RF.short_name(m), linewidth=1.4); ax.fill(angles, v, color=RF.color_for(m), alpha=0.10)
-ax.set_xticks(angles[:-1]); ax.set_xticklabels(tasks); ax.set_yticks([0.1, 0.3, 0.5]); ax.set_ylim(0, 0.65)
-ax.set_title("Per-task Grounding Gap (blur)"); ax.legend(loc="lower right", bbox_to_anchor=(1.25, -0.05), fontsize=7, frameon=False)
-fig.savefig(FIG / "fig_task_radar.pdf"); plt.close(fig)
-print("heatmap rows:", order)

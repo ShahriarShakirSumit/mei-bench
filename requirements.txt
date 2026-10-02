@@ -1,4 +1,4 @@
-# Versions of the environment that produced the ACML 2026 camera-ready results (Python 3.11, CUDA 12.1, V100).
+# Versions of the environment that produced the results in our ACML 2026 paper (Python 3.11, CUDA 12.1, V100).
 --extra-index-url https://download.pytorch.org/whl/cu121
 torch==2.5.1
 torchvision==0.20.1

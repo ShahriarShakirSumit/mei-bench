@@ -4,9 +4,8 @@
 pip install -r requirements.txt && pip install -e .
 pytest -q tests
 
-# reproduce the paper's tables and figures from the shipped predictions (CPU)
-python reproduce/unpack_results.py && python reproduce/copy_original_run.py
-python reproduce/molmo_extract.py && python reproduce/molmo_stratified_tables.py
+# compute the paper's numbers from the shipped model outputs (CPU)
+python reproduce/unpack_results.py && python reproduce/molmo_extract.py
 python reproduce/make_main_tables.py && python reproduce/robustness_checks.py
 
 # evaluate a model (GPU; COCO val2017 in data/coco/val2017)
