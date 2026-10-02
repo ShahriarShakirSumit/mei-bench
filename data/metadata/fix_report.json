@@ -1,0 +1,7 @@
+{
+  "items_before": 959,
+  "items_after": 615,
+  "dropped_iou_violation": 109,
+  "dropped_area_match_violation": 0,
+  "dropped_area_fraction_degenerate": 235
+}

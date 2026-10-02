@@ -1,0 +1,47 @@
+{
+  "intervention_types": [
+    {
+      "name": "evidence_blur",
+      "target": "evidence_box",
+      "operation": "gaussian_blur",
+      "params": {
+        "blur_radius": "int (px)"
+      }
+    },
+    {
+      "name": "sham_blur",
+      "target": "sham_box",
+      "operation": "gaussian_blur",
+      "params": {
+        "blur_radius": "int (px)"
+      }
+    },
+    {
+      "name": "evidence_gray",
+      "target": "evidence_box",
+      "operation": "uniform_gray_fill",
+      "params": {
+        "gray_value": "int (0-255)"
+      }
+    },
+    {
+      "name": "sham_gray",
+      "target": "sham_box",
+      "operation": "uniform_gray_fill",
+      "params": {
+        "gray_value": "int (0-255)"
+      }
+    },
+    {
+      "name": "evidence_swap",
+      "target": "evidence_box",
+      "operation": "content_swap",
+      "params": {},
+      "notes": "Replace evidence box content with patch from a different COCO val2017 image at the same coordinates."
+    }
+  ],
+  "default_params": {
+    "blur_radius": 51,
+    "gray_value": 128
+  }
+}

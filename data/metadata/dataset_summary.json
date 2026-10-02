@@ -1,0 +1,20 @@
+{
+  "total_items": 615,
+  "unique_source_images": 387,
+  "task_type_counts": {
+    "spatial_relations": 153,
+    "counting": 144,
+    "object_identification": 114,
+    "text_in_image": 86,
+    "attribute_verification": 118
+  },
+  "intervention_type_counts": {
+    "evidence_blur": 615,
+    "evidence_gray": 615,
+    "evidence_swap": 615,
+    "sham_blur": 615,
+    "sham_gray": 615
+  },
+  "source_dataset": "coco_val2017",
+  "version": "1.0.1"
+}

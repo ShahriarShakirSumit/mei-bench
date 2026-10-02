@@ -1,0 +1,14 @@
+{
+ "model": "Molmo-7B-D",
+ "n_items": 615,
+ "original_accuracy": 0.2813,
+ "CS_blur": 0.289,
+ "CS_gray": 0.3815,
+ "CS_swap": 0.3526,
+ "SI_blur": 0.052,
+ "SI_gray": 0.0694,
+ "GG": 0.237,
+ "SR_blur": 0.8195,
+ "SR_gray": 0.8,
+ "GS": 0.82
+}

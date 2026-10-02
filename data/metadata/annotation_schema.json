@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MEI-Bench annotation record",
+  "type": "object",
+  "required": [
+    "item_id",
+    "source_dataset",
+    "source_image_id",
+    "image_path",
+    "question",
+    "valid_answers",
+    "task_type",
+    "evidence_region",
+    "variants"
+  ],
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "pattern": "^mei_[0-9]{6}$"
+    },
+    "source_dataset": {
+      "type": "string",
+      "const": "coco_val2017"
+    },
+    "source_image_id": {
+      "type": "string"
+    },
+    "image_path": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "valid_answers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "object_identification",
+        "attribute_verification",
+        "spatial_relations",
+        "counting",
+        "text_in_image"
+      ]
+    },
+    "difficulty": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "easy",
+        "medium",
+        "hard",
+        null
+      ]
+    },
+    "evidence_region": {
+      "type": "object",
+      "required": [
+        "bbox",
+        "area_fraction"
+      ],
+      "properties": {
+        "bbox": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "[x, y, w, h] in pixels"
+        },
+        "mask_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "area_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "intervention_type",
+          "image_path"
+        ],
+        "properties": {
+          "intervention_type": {
+            "type": "string",
+            "enum": [
+              "evidence_blur",
+              "sham_blur",
+              "evidence_gray",
+              "sham_gray",
+              "evidence_swap"
+            ]
+          },
+          "image_path": {
+            "type": "string"
+          },
+          "intervention_params": {
+            "type": "object"
+          },
+          "sham_region_bbox": {
+            "type": [
+              "array",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "human_verified": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mei-benchmark"
+version = "1.0.1"
+description = "MEI-Bench: controlled evidence interventions for diagnosing visual grounding in vision-language models (ACML 2026)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT (code); CC-BY-4.0 (annotations)"}
+authors = [{name = "Shahriar Shakir Sumit"}, {name = "Murat Tahtali"}, {name = "Seyedali Mirjalili"}]
+
+[tool.setuptools.packages.find]
+include = ["mei_benchmark*"]
+
+[tool.setuptools.package-data]
+mei_benchmark = ["configs/*.yaml"]

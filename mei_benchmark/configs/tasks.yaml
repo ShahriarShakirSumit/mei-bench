@@ -1,0 +1,77 @@
+# MEI Benchmark - Task-specific Configurations
+# ==============================================
+# Per-task-type question templates and parameters
+
+tasks:
+  text_in_image:
+    description: "Identify or read text visible in the image"
+    question_templates:
+      - "What text is written on the {object}?"
+      - "What does the sign say?"
+      - "Can you read the text in this image?"
+    answer_type: "free_text"
+    evidence_hint: "Look for text regions (signs, labels, screens)"
+    n_items: 200
+    difficulty_distribution:
+      easy: 0.33
+      medium: 0.34
+      hard: 0.33
+
+  attribute_verification:
+    description: "Verify visual attributes (color, material, state)"
+    question_templates:
+      - "What color is the {object}?"
+      - "Is the {object} {attribute_a} or {attribute_b}?"
+      - "What material is the {object} made of?"
+    answer_type: "multiple_choice"
+    n_choices: 4
+    evidence_hint: "Focus on the specific object and its visual features"
+    n_items: 200
+    difficulty_distribution:
+      easy: 0.33
+      medium: 0.34
+      hard: 0.33
+
+  spatial_relations:
+    description: "Determine spatial relationships between objects"
+    question_templates:
+      - "Is the {object_a} to the left or right of the {object_b}?"
+      - "Which object is closer to the camera?"
+      - "What is {direction} of the {object}?"
+    answer_type: "multiple_choice"
+    n_choices: 2
+    evidence_hint: "Both objects and their relative positions are evidence"
+    n_items: 200
+    difficulty_distribution:
+      easy: 0.33
+      medium: 0.34
+      hard: 0.33
+
+  counting:
+    description: "Count occurrences of objects in the scene"
+    question_templates:
+      - "How many {objects} are in the image?"
+      - "Count the number of {objects}."
+      - "Are there more {object_a}s or {object_b}s?"
+    answer_type: "numeric"
+    evidence_hint: "All instances of the counted object are evidence"
+    n_items: 200
+    difficulty_distribution:
+      easy: 0.33
+      medium: 0.34
+      hard: 0.33
+
+  object_identification:
+    description: "Identify specific objects or their categories"
+    question_templates:
+      - "What is the {object_desc} in the image?"
+      - "What type of {category} is shown?"
+      - "Identify the main object in the center."
+    answer_type: "multiple_choice"
+    n_choices: 4
+    evidence_hint: "The target object itself is the evidence"
+    n_items: 200
+    difficulty_distribution:
+      easy: 0.33
+      medium: 0.34
+      hard: 0.33

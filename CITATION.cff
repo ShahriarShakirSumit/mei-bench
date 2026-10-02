@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use MEI-Bench, please cite the paper."
+title: "MEI-Bench: Controlled Evidence Interventions for Diagnosing Visual Grounding in Vision-Language Models"
+authors:
+  - family-names: Sumit
+    given-names: Shahriar Shakir
+  - family-names: Tahtali
+    given-names: Murat
+  - family-names: Mirjalili
+    given-names: Seyedali
+version: 1.0.1
+license: MIT
+repository-code: "https://github.com/ShahriarShakirSumit/mei-bench"
+preferred-citation:
+  type: conference-paper
+  title: "Controlled Evidence Interventions for Diagnosing Visual Grounding in Vision-Language Models"
+  authors:
+    - family-names: Sumit
+      given-names: Shahriar Shakir
+    - family-names: Tahtali
+      given-names: Murat
+    - family-names: Mirjalili
+      given-names: Seyedali
+  collection-title: "Proceedings of the 18th Asian Conference on Machine Learning (ACML 2026)"
+  publisher:
+    name: "PMLR"
+  year: 2026

@@ -1,0 +1,40 @@
+# MEI Benchmark - API Models Configuration
+# =========================================
+# Configurations for closed-source API-based VLLMs
+
+models:
+  gpt-4o:
+    model_name: "GPT-4o"
+    model_id: "gpt-4o"
+    wrapper_class: "mei_benchmark.models.api_models:GPT4oWrapper"
+    max_new_tokens: 128
+    temperature: 0.0
+    api_key_env: "OPENAI_API_KEY"
+    rate_limit:
+      requests_per_minute: 30
+      retry_max: 3
+      retry_backoff: 2.0
+
+  claude-3.5-sonnet:
+    model_name: "Claude-3.5-Sonnet"
+    model_id: "claude-sonnet-4-20250514"
+    wrapper_class: "mei_benchmark.models.api_models:ClaudeWrapper"
+    max_new_tokens: 128
+    temperature: 0.0
+    api_key_env: "ANTHROPIC_API_KEY"
+    rate_limit:
+      requests_per_minute: 30
+      retry_max: 3
+      retry_backoff: 2.0
+
+  gemini-1.5-pro:
+    model_name: "Gemini-1.5-Pro"
+    model_id: "gemini-1.5-pro"
+    wrapper_class: "mei_benchmark.models.api_models:GeminiWrapper"
+    max_new_tokens: 128
+    temperature: 0.0
+    api_key_env: "GOOGLE_API_KEY"
+    rate_limit:
+      requests_per_minute: 15
+      retry_max: 3
+      retry_backoff: 2.0

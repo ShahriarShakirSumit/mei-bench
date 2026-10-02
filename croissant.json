@@ -1,0 +1,231 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "sc": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "MEI-Bench",
+  "description": "MEI-Bench (Minimal Evidence Intervention Benchmark) is a diagnostic benchmark for testing whether vision-language models ground answers in relevant visual evidence. It pairs minimal evidence regions with area-matched sham controls and applies five targeted interventions (evidence blur, sham blur, evidence gray-out, sham gray-out, evidence content swap) to 615 COCO val2017 items.",
+  "url": "https://github.com/ShahriarShakirSumit/mei-bench",
+  "version": "1.0.1",
+  "creator": [
+    {
+      "@type": "sc:Person",
+      "name": "Shahriar Shakir Sumit"
+    },
+    {
+      "@type": "sc:Person",
+      "name": "Murat Tahtali"
+    },
+    {
+      "@type": "sc:Person",
+      "name": "Seyedali Mirjalili"
+    }
+  ],
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "citation": "Sumit, S. S., Tahtali, M., and Mirjalili, S. Controlled Evidence Interventions for Diagnosing Visual Grounding in Vision-Language Models. Proceedings of the 18th Asian Conference on Machine Learning (ACML 2026), PMLR.",
+  "keywords": [
+    "visual grounding",
+    "vision-language models",
+    "visual question answering",
+    "causal intervention",
+    "sham control",
+    "benchmark",
+    "diagnostic evaluation",
+    "hallucination",
+    "spurious correlations",
+    "VLLM evaluation"
+  ],
+  "isLiveDataset": false,
+  "inLanguage": "en",
+  "datePublished": "2026-05-04",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "annotations-jsonl",
+      "name": "mei_bench.jsonl",
+      "contentUrl": "data/annotations/mei_bench.jsonl",
+      "encodingFormat": "application/jsonl",
+      "description": "615 MEI-Bench items, one JSON object per line."
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "sample-jsonl",
+      "name": "mei_bench_sample.jsonl",
+      "contentUrl": "data/sample/mei_bench_sample.jsonl",
+      "encodingFormat": "application/jsonl",
+      "description": "First 25 items for quick preview."
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "annotation-schema",
+      "name": "annotation_schema.json",
+      "contentUrl": "data/metadata/annotation_schema.json",
+      "encodingFormat": "application/schema+json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "intervention-schema",
+      "name": "intervention_schema.json",
+      "contentUrl": "data/metadata/intervention_schema.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "task-type-schema",
+      "name": "task_type_schema.json",
+      "contentUrl": "data/metadata/task_type_schema.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "region-validity-schema",
+      "name": "region_validity_schema.json",
+      "contentUrl": "data/metadata/region_validity_schema.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "coco-source-info",
+      "name": "coco_source_info.json",
+      "contentUrl": "data/metadata/coco_source_info.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "dataset-summary",
+      "name": "dataset_summary.json",
+      "contentUrl": "data/metadata/dataset_summary.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "fix-report",
+      "name": "fix_report.json",
+      "contentUrl": "data/metadata/fix_report.json",
+      "encodingFormat": "application/json"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "items",
+      "name": "items",
+      "description": "MEI-Bench item records loaded from data/annotations/mei_bench.jsonl.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "name": "item_id",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "source_dataset",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "source_image_id",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "image_path",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "question",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "valid_answers",
+          "dataType": "sc:Text",
+          "repeated": true
+        },
+        {
+          "@type": "cr:Field",
+          "name": "task_type",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "evidence_region.bbox",
+          "dataType": "sc:Float",
+          "repeated": true
+        },
+        {
+          "@type": "cr:Field",
+          "name": "evidence_region.area_fraction",
+          "dataType": "sc:Float"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "variants.intervention_type",
+          "dataType": "sc:Text",
+          "repeated": true
+        }
+      ]
+    }
+  ],
+  "sourceData": [
+    {
+      "@type": "sc:Dataset",
+      "name": "COCO 2017 (val2017)",
+      "url": "https://cocodataset.org/",
+      "description": "MEI-Bench references images from COCO val2017 by image id and filename. Raw COCO images are NOT redistributed in this package.",
+      "license": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  ],
+  "annotationProcess": "Each item was authored and reviewed by a project author. Questions were drafted to target one of five task types and to be answerable from a minimal evidence region. Ground-truth answers were verified manually.",
+  "regionConstructionProcess": "Evidence regions were derived from COCO instance/panoptic annotations and tightened by manual review. Sham regions were selected automatically to satisfy: area_fraction in [0.02, 0.50], evidence/sham IoU <= 0.10, and |sham_area - evidence_area| / evidence_area <= 0.20.",
+  "interventionGenerationProcess": "Five interventions per item: evidence_blur (Gaussian blur on evidence box), sham_blur (Gaussian blur on sham box), evidence_gray (uniform gray fill on evidence box), sham_gray (uniform gray fill on sham box), evidence_swap (evidence box colour-inverted and its 4x4 blocks randomly shuffled). Blur: OpenCV Gaussian kernel 51; gray value 128. See docs/intervention_generation.md.",
+  "rawImageRedistributionStatement": "Raw COCO images are NOT redistributed by this package. Users download COCO val2017 from the official COCO source.",
+  "personalDataStatement": "No personal data is newly collected by MEI-Bench. COCO images may contain people; identity attributes are not annotated.",
+  "humanSubjectsStatement": "No new human-subject data collection is performed by this package.",
+  "intendedUse": "Diagnostic evaluation of causal visual grounding in vision-language models. Not a safety certification.",
+  "limitations": "Bounded by COCO val2017 distribution; English-only; fixed intervention parameters per condition; evidence selection reflects authors' judgment of minimality.",
+  "rai:dataCollection": "References to COCO val2017 images. No new image collection.",
+  "rai:dataBiases": "Inherits the geographic, demographic, and category distribution biases of COCO.",
+  "rai:personalSensitiveInformation": "None newly collected.",
+  "rai:useCases": "Causal visual grounding analysis; sham-control evaluation; VLLM robustness diagnostics.",
+  "rai:safetyAndMisuseWarning": "Scores must not be interpreted as a safety or deployment readiness certification.",
+  "maintenance": {
+    "versioningPolicy": "Semantic versioning (major.minor.patch).",
+    "currentVersion": "1.0.0",
+    "updatePolicy": "Bug fixes via patch releases. New items or new fields via minor releases. Schema-breaking changes via major releases."
+  }
+}

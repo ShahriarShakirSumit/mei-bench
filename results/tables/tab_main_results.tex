@@ -1,0 +1,20 @@
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+Model & $n_c$ & Acc & CS$_\text{blur}$ & CS$_\text{gray}$ & SI$_\text{blur}$ & GG & GG 95\% CI & GS \\
+\midrule
+Molmo-7B-D$^\dagger$ & 173 & .281 & .289 & .382 & .052 & .237 & \scriptsize[.17,.30] & .820 \\
+InternVL2.5-8B & 208 & .338 & .317 & .423 & .062 & .255 & \scriptsize[.19,.32] & .803 \\
+LLaVA-NeXT-7B & 197 & .320 & .269 & .371 & .056 & .213 & \scriptsize[.15,.28] & .792 \\
+InternVL2-8B & 202 & .328 & .347 & .381 & .074 & .272 & \scriptsize[.20,.34] & .786 \\
+Qwen2-VL-7B & 222 & .361 & .360 & .446 & .095 & .266 & \scriptsize[.19,.34] & .737 \\
+Llama-3.2-11B-Vision & 118 & .192 & .203 & .305 & .059 & .144 & \scriptsize[.08,.22] & .708 \\
+Claude-Sonnet-4.5 & 172 & .280 & .372 & .471 & .110 & .262 & \scriptsize[.18,.34] & .703 \\
+LLaVA-1.5-13B & 190 & .309 & .274 & .358 & .084 & .189 & \scriptsize[.13,.26] & .692 \\
+LLaVA-1.5-7B & 184 & .299 & .261 & .375 & .082 & .179 & \scriptsize[.12,.24] & .688 \\
+Phi-3.5-Vision & 184 & .299 & .321 & .424 & .103 & .217 & \scriptsize[.15,.29] & .678 \\
+DeepSeek-VL-7B & 196 & .319 & .270 & .357 & .117 & .153 & \scriptsize[.09,.22] & .566 \\
+\midrule
+\multicolumn{9}{@{}l}{\scriptsize\textit{Preliminary (free-tier-truncated run; excluded from all ranges and comparisons)}} \\
+Gemini-2.5-Pro & 38 & .307 & .342 & .500 & .079 & .263 & \scriptsize[.11,.45] & .769 \\
+\bottomrule
+\end{tabular}

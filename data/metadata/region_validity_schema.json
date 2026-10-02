@@ -1,0 +1,25 @@
+{
+  "constraints": [
+    {
+      "name": "area_fraction_range",
+      "applies_to": [
+        "evidence_region",
+        "sham_region"
+      ],
+      "min": 0.005,
+      "max": 1.0,
+      "description": "Reported per item; the released data spans roughly 0.005 to 1.0. Informational only; the strict constraint is the IoU upper bound below."
+    },
+    {
+      "name": "evidence_sham_iou_max",
+      "value": 0.1,
+      "description": "Sham region must have IoU <= 0.10 with the evidence region."
+    },
+    {
+      "name": "area_match_tolerance",
+      "value": 0.2,
+      "description": "Sham region area must be within +/- 20% of the evidence region area (relative)."
+    }
+  ],
+  "filtering_report_path": "data/metadata/fix_report.json"
+}

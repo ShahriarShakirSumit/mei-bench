@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+*.log
+/outputs/
+/models/
+/data/coco/
+/data/mei_bench/
+/data/rerun/variants/
+/data/rerun/*.jpg
+/data/robustness_conditions/*/variants/

@@ -1,0 +1,94 @@
+# MEI Benchmark - Base Configuration
+# ===================================
+# Minimal Evidence Intervention benchmark for causal visual grounding evaluation
+
+project:
+  name: "MEI-Benchmark"
+  version: "1.0.0"
+  description: "Minimal Evidence Intervention benchmark for diagnosing visual grounding in VLLMs"
+
+# Data paths (relative to the repository root; override on the command line with --data-dir / --output-dir)
+paths:
+  data_root: "data/mei_bench"
+  coco_images: "data/coco/val2017"
+  coco_annotations: "data/coco/annotations/instances_val2017.json"
+  output_root: "outputs"
+  model_cache: "~/.cache/huggingface/hub"
+  sam_checkpoint: "models/sam_vit_h_4b8939.pth"
+
+# Evidence finding (SAM + CLIP)
+evidence_finder:
+  sam_model_type: "vit_h"
+  clip_model_name: "ViT-B-32"
+  clip_pretrained: "laion2b_s34b_b79k"
+  device: "cuda:0"
+  points_per_side: 32
+  pred_iou_thresh: 0.88
+  stability_score_thresh: 0.95
+  min_mask_area_fraction: 0.005
+  max_mask_area_fraction: 0.40
+
+# Intervention generation
+interventions:
+  types:
+    - evidence_blur
+    - evidence_gray
+    - evidence_swap
+    - distractor_added
+    - sham_blur
+    - sham_gray
+  blur_radius: 51
+  gray_value: 128  # 0-255 grayscale value
+  swap_method: "invert"  # invert | shuffle
+  distractor_scale_range: [0.8, 1.2]
+  sham_max_overlap: 0.1  # Max IoU with evidence for sham placement
+
+# Dose-response curve
+dose_response:
+  enabled: true
+  blur_levels: [11, 21, 31, 51, 71, 101]
+  gray_levels: [32, 64, 96, 128, 160, 192]
+
+# Dataset construction
+dataset:
+  n_items_per_task: 200
+  task_types:
+    - text_in_image
+    - attribute_verification
+    - spatial_relations
+    - counting
+    - object_identification
+  difficulty_levels:
+    - easy
+    - medium
+    - hard
+  seed: 42
+  human_verified_fraction: 0.15  # 15% of items get human verification
+
+# Evaluation
+evaluation:
+  metrics:
+    - causal_sensitivity
+    - sham_invariance
+    - grounding_gap
+    - sham_robustness
+    - grounding_specificity
+  bootstrap_n: 1000
+  bootstrap_ci: 0.95
+  stratify_by:
+    - task_type
+    - difficulty
+    - evidence_size  # small (<5%), medium (5-15%), large (>15%)
+
+# Output / reporting
+output:
+  save_predictions: true
+  save_figures: true
+  figure_format: "pdf"
+  figure_dpi: 300
+  latex_table: true
+
+# Logging
+logging:
+  level: "INFO"
+  file: "mei_benchmark.log"

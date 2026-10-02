@@ -1,0 +1,3 @@
+# Only needed to query the closed-source models (Claude, Gemini) with mei_benchmark/scripts/run_api_eval.py
+anthropic
+google-genai

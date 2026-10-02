@@ -1,0 +1,24 @@
+{
+  "task_types": [
+    {
+      "name": "object_identification",
+      "description": "Question asks to identify an object or its category in the image."
+    },
+    {
+      "name": "attribute_verification",
+      "description": "Question asks to verify a visual attribute (color, material, state)."
+    },
+    {
+      "name": "spatial_relations",
+      "description": "Question asks about the spatial relation between two entities."
+    },
+    {
+      "name": "counting",
+      "description": "Question asks for the count of a particular entity in the image."
+    },
+    {
+      "name": "text_in_image",
+      "description": "Question asks about text rendered inside the image."
+    }
+  ]
+}
